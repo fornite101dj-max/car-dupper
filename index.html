@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAR DUPPER</title>
+<style>
+body{
+background:#111;
+color:white;
+font-family:Arial,sans-serif;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+margin:0;
+}
+.container{
+width:600px;
+max-width:90%;
+text-align:center;
+}
+h1{
+font-size:60px;
+color:#00ff88;
+}
+textarea,input{
+width:100%;
+padding:15px;
+margin:10px 0;
+border-radius:10px;
+border:none;
+}
+textarea{
+height:180px;
+}
+button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:10px;
+background:#00ff88;
+font-weight:bold;
+cursor:pointer;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>CAR DUPPER</h1>
+
+<form id="f">
+<textarea name="opis" placeholder="Opis"></textarea>
+
+<input name="gracz" placeholder="Nazwa gracza">
+
+<input name="idpojazdu" placeholder="ID pojazdu">
+
+<button type="submit">WYŚLIJ</button>
+</form>
+
+<script>
+const WEB_APP_URL="https://script.google.com/macros/s/AKfycbw_OM9EqpdSzb-9f6O8HNLYH8YRuyjGxBe6_nwsKS7BZORe3MpzKDAuPfZQfZRunBL3Qg/exec";
+
+document.getElementById('f').addEventListener('submit', async e=>{
+e.preventDefault();
+
+const data = Object.fromEntries(new FormData(e.target));
+
+await fetch(WEB_APP_URL,{
+method:'POST',
+body:JSON.stringify(data)
+});
+
+alert('Wysłano');
+e.target.reset();
+});
+</script>
+
+</div>
+</body>
+</html>
