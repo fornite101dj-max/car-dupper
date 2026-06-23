@@ -60,21 +60,25 @@ cursor:pointer;
 </form>
 
 <script>
-const WEB_APP_URL="https://script.google.com/macros/s/AKfycbw_OM9EqpdSzb-9f6O8HNLYH8YRuyjGxBe6_nwsKS7BZORe3MpzKDAuPfZQfZRunBL3Qg/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw_OM9EqpdSzb-9f6O8HNLYH8YRuyjGxBe6_nwsKS7BZORe3MpzKDAuPfZQfZRunBL3Qg/exec";
 
-document.getElementById('f').addEventListener('submit', async e=>{
-e.preventDefault();
+document.getElementById('f').addEventListener('submit', function(e) {
+  e.preventDefault();
 
-const data = Object.fromEntries(new FormData(e.target));
+  const data = {
+    opis: document.querySelector('[name="opis"]').value,
+    gracz: document.querySelector('[name="gracz"]').value,
+    idpojazdu: document.querySelector('[name="idpojazdu"]').value
+  };
 
-fetch(WEB_APP_URL, {
-  method: 'POST',
-  mode: 'no-cors',
-  body: JSON.stringify(data)
-});
+  fetch(WEB_APP_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: JSON.stringify(data)
+  });
 
-alert('Wysłano');
-e.target.reset();
+  alert('Wysłano!');
+  document.getElementById('f').reset();
 });
 </script>
 
